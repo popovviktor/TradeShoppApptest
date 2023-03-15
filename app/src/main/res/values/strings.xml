@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SSSSSS</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="bottontextbtn">Alreade have an account?</string>
+    <string name="bottontextbtn2">Alreade have not an account?</string>
+    <string name="login">Log in</string>
+    <string name="signin">Sign in</string>
+    <string name="singinWithGoogle">Sign in with Google</string>
+    <string name="singinWithApple">Sign in with Apple</string>
+    <string name="welcomeback">Welcome back</string>
+    <string name="createPassword">Сreate a password</string>
+    <string name="save">Save</string>
+    <string name="uploadphtotbtn">Upload item</string>
+    <string name="category1">Phones</string>
+    <string name="category2">Headphones</string>
+    <string name="category3">Games</string>
+    <string name="category4">Cars</string>
+    <string name="category5">Furniture</string>
+    <string name="category6">Kids</string>
+</resources>
