@@ -8,9 +8,7 @@ import com.example.testcleanarch.data.models.User
 import com.example.testcleanarch.data.models.UserInfoTuple
 import com.example.testcleanarch.data.storage.UserStorage
 import com.example.testcleanarch.data.utils.BaseApiResponse
-import com.example.testcleanarch.domain.models.FlashSale
-import com.example.testcleanarch.domain.models.LatestItem
-import com.example.testcleanarch.domain.models.UserModelDomain
+import com.example.testcleanarch.domain.models.*
 import com.example.testcleanarch.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -40,7 +38,7 @@ class UserRepositoryImpl (
         val arr = getAll()
         val arrusname = ArrayList<UserModelDomain>()
         for (elem in arr){
-            arrusname.add(UserModelDomain(elem.firstName,elem.firstName,elem.email,elem.password))
+            arrusname.add(UserModelDomain(elem.firstName,elem.lastName,elem.email,elem.password))
         }
         return arrusname
     }
@@ -68,13 +66,26 @@ class UserRepositoryImpl (
         return latest
     }
 
+    override suspend fun getItemOnTouch(): ItemOnTouch {
+        val data = safeApiCall { remoteDataSource.getItemOnTouch() }.data!!
+        val item = ItemOnTouch(name = data.name, description = data.description, rating = data.rating,
+            numberOfReviews = data.numberOfReviews, price = data.price, colors = data.colors, imageUrls = data.imageUrls)
+        return item
+    }
+
+    override suspend fun getSearch(): Search {
+        val data = safeApiCall { remoteDataSource.getSearch() }.data!!
+        val search = Search(words = data.words)
+        return search
+    }
+
     fun mapToStorage(userModelDomain: UserModelDomain): User {
         val user = User(userModelDomain.firstName,userModelDomain.lastName,userModelDomain.email,userModelDomain.password)
         return user
     }
     fun mapToDomain():UserModelDomain{
         System.out.println(userStorage.get().firstName)
-    return UserModelDomain(userStorage.get().firstName,userStorage.get().lastName,userStorage.get().email,userStorage.get().password)
+    return UserModelDomain(firstName = userStorage.get().firstName, lastName = userStorage.get().lastName,userStorage.get().email,userStorage.get().password)
     }
     fun flashSaleFromDatatoDomain(flashSale: FlashSaleItem):com.example.testcleanarch.domain.models.FlashSaleItem{
         var flashdomainItem = com.example.testcleanarch.domain.models.FlashSaleItem()

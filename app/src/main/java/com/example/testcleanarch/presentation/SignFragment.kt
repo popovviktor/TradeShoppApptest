@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.testcleanarch.R
 import com.example.testcleanarch.databinding.FragmentSignBinding
 
@@ -39,24 +41,41 @@ class SignFragment : Fragment() {
         binding.btnSignIN.setOnClickListener {
         val email = binding.editEmail.text.toString()
         var checkcorrectemail = mainviewModel.emailCheckCorrect(email)
-        var checkemailinDb = mainviewModel.emailCheckInDB(email)
         if (checkcorrectemail==false){
             System.out.println("Некорректный mail")
-            //Toast.makeText(activity,"Некорректный mail",Toast.LENGTH_SHORT).show()
+            System.out.println("Некорректный mail!!!!!!!!!!")
+            Toast.makeText(activity,"Uncorrect mail",Toast.LENGTH_SHORT).show()
         }
         if (checkcorrectemail==true){
-            if (checkemailinDb==false){System.out.println("Даный email зарегистрирован")
-            //Toast.makeText(activity,"Даный email зарегистрирован",Toast.LENGTH_SHORT).show()}
-            }
-            if (checkemailinDb==true){
-                val firstname = binding.editFirstName.text.toString()
-                val lastname = binding.editLastNAme.text.toString()
-                if (mainviewModel.checkCorrectFirstLastName(firstname,lastname)==true){
-                    mainviewModel.newUserDbStepOne(firstName = firstname, lastName = lastname,email=email)
-                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.place_holder_login_act,SignCreatePasswordFragment())?.commit()
-                }else{//Toast.makeText(activity,"Провести заполнены ли все данные",Toast.LENGTH_SHORT).show()}
-            }
-        }
+            System.out.println("корректный mail")
+            mainviewModel.emailCheckInDB(email)
+            mainviewModel.liveBoolemailCheckInDB.observe(requireActivity() as LoginActivity,
+                Observer {
+                    if (it==true){System.out.println("Даный email зарегистрирован")
+                        Toast.makeText(activity,"Даный email зарегистрирован",Toast.LENGTH_SHORT).show()
+                        System.out.println("Сработало 1")
+                    }
+                    if (it==false){
+                        System.out.println("Сработало 2")
+                        val firstname = binding.editFirstName.text.toString()
+                        val lastname = binding.editLastNAme.text.toString()
+                        System.out.println("!!!!!!!!!! Sign fragment")
+                        System.out.println("$firstname   $lastname")
+                        System.out.println("!!!!!!!!!! Sign fragment")
+
+
+
+                        if (mainviewModel.checkCorrectFirstLastName(firstname,lastname)==true){
+                            System.out.println("Сработало 3")
+                            mainviewModel.newUserDbStepOne(firstName = firstname, lastName = lastname,email=email)
+                            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.place_holder_login_act,SignCreatePasswordFragment())?.commit()
+                        }else{Toast.makeText(activity,"Провести заполнены ли все данные",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+
+                })
+
         }
     }
         binding.btnLogIN.setOnClickListener{

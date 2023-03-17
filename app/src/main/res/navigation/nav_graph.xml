@@ -31,5 +31,10 @@
         android:name="com.example.testcleanarch.presentation.screensNav.ProfileUserFragment"
         android:label="fragment_more"
         tools:layout="@layout/fragment_profile_user" />
+    <fragment
+        android:id="@+id/itemTouchFragment"
+        android:name="com.example.testcleanarch.presentation.screensNav.touchitem.ItemTouchFragment"
+        android:label="fragment_item_touch"
+        tools:layout="@layout/fragment_item_touch" />
 
 </navigation>

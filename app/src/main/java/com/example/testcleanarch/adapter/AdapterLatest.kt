@@ -1,8 +1,10 @@
 package com.example.testcleanarch.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testcleanarch.R
 import com.example.testcleanarch.databinding.ItemLatestForRvBinding
@@ -23,6 +25,11 @@ class AdapterLatest:RecyclerView.Adapter<AdapterLatest.LatestHolder>() {
                 .resize(125,170)
                 .into(imViewLatestitem,cal)
             imViewLatestitem.visibility = View.INVISIBLE
+            itemView.setOnClickListener {
+                var bundle: Bundle = Bundle()
+                bundle.putString("mainphoto",item.imageUrl)
+                itemView.findNavController().navigate(R.id.itemTouchFragment,bundle)
+            }
         }
         }
 

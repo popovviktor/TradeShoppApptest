@@ -11,7 +11,8 @@
         android:id="@+id/place_holder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,11 +35,15 @@
         android:id="@+id/bottomNavMenu"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/backmenu"
         app:itemBackground="@drawable/childitem"
-        app:itemIconTint="#909090"
+        app:itemIconTint="@color/state_list"
+        app:itemTextColor="@color/state_list"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/place_holder"
         app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

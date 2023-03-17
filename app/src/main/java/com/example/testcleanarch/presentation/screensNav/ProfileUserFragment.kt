@@ -34,7 +34,10 @@ class ProfileUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var first = activity?.intent?.getStringExtra("firstName")
         var lastname = activity?.intent?.getStringExtra("LastName")
-        binding.firstNameAndLast.text = first + " " + lastname
+        System.out.println(first)
+        System.out.println(lastname)
+
+        binding.firstNameAndLast.text = "$first $lastname"
         mainviewModel.liveBitMapforPrifilePhoto.observe(requireActivity()as MainActivity,Observer{
             if (it!=null){
                 binding.imViewProfile.setImageBitmap(it)

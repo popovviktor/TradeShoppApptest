@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testcleanarch.domain.models.FlashSale
-import com.example.testcleanarch.domain.models.Latest
-import com.example.testcleanarch.domain.models.UserModelDomain
+import com.example.testcleanarch.domain.models.*
 import com.example.testcleanarch.domain.usecases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,12 +13,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserNameUseCase,
-                                        private val saveUserNameUseCase: SaveUserNameUseCase,
-                                        private val saveUserDbUseCase: SaveUserDbUseCase,
-                                        private val getAllUserDbUseCase: GetAllUserDbUseCase,
-                                        private val getAllFlashUseCase: GetAllFlashUseCase,
-                                        private val getAllLatestUseCase: GetAllLatestUseCase):ViewModel() {
+class MainViewModel @Inject constructor(
+        private val getSearchUseCase: GetSearchUseCase,
+        private val getUserNameUseCase: GetUserNameUseCase,
+        private val getItemOnTouchUseCase: GetItemOnTouchUseCase,
+        private val saveUserDbUseCase: SaveUserDbUseCase,
+        private val getAllUserDbUseCase: GetAllUserDbUseCase,
+        private val getAllFlashUseCase: GetAllFlashUseCase,
+        private val getAllLatestUseCase: GetAllLatestUseCase):ViewModel() {
     private val mlive =MutableLiveData<UserModelDomain>()
     val live:LiveData<UserModelDomain> = mlive
     private val mlivalatest = MutableLiveData<Latest>()
@@ -36,8 +36,27 @@ class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserN
     //use livedata
     private val mliveBoolLogIn = MutableLiveData<Boolean>()
     val liveBoolLogIn = mliveBoolLogIn
+    private val mliveBoolemailCheckInDB = MutableLiveData<Boolean>()
+    val liveBoolemailCheckInDB = mliveBoolemailCheckInDB
     private val mliveBitmapProfilePhoto = MutableLiveData<Bitmap>()
     val liveBitMapforPrifilePhoto:LiveData<Bitmap> = mliveBitmapProfilePhoto
+    private val mliveGetItemOnTouch = MutableLiveData<ItemOnTouch>()
+    val liveGetItemOnTouch:LiveData<ItemOnTouch> = mliveGetItemOnTouch
+    private val mliveSearch = MutableLiveData<Search>()
+    val liveSearch:LiveData<Search> = mliveSearch
+    private val mliveSearchWord = MutableLiveData<String>()
+    val liveSearchWord:LiveData<String> = mliveSearchWord
+    fun setSearch(word:String){
+     mliveSearchWord.value = word
+    }
+    fun getSearch(){
+        var search = Search()
+        viewModelScope.launch {
+            search = getSearchUseCase.execute()
+            mliveSearch.value = search
+        }
+    }
+
     fun setBitMapUserPhoto(bitmap: Bitmap){
         mliveBitmapProfilePhoto.value = bitmap
     }
@@ -73,6 +92,7 @@ class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserN
         System.out.println("Сверяем с дб")
         var boolean =false
         viewModelScope.launch(Dispatchers.Main) {
+            liveBoolLogIn.value= null
             var arr = get()
             System.out.println(arr.size)
             for (elem in arr){
@@ -84,13 +104,15 @@ class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserN
                     System.out.println(elem.firstName)
                     System.out.println(elem.lastName)
                     System.out.println("Совпадение найдено")
-                    mliveNewUserForDbStepTwo.value = UserModelDomain(elem.firstName,elem.lastName,email=elem.email,elem.password)
-                    mliveUserLoginDone.value = UserModelDomain(elem.firstName,elem.lastName,email=elem.email,elem.password)
+                    mliveNewUserForDbStepTwo.value = UserModelDomain(firstName = elem.firstName, lastName = elem.lastName,email=elem.email,password =elem.password)
+                    mliveUserLoginDone.value = UserModelDomain(firstName = elem.firstName, lastName = elem.lastName,email=elem.email,password= elem.password)
                     mliveBoolLogIn.value = true
                     System.out.println("mliveUser сохр")
                     System.out.println(elem)
-
                 }
+            }
+            if(boolean == false){
+                mliveBoolLogIn.value = false
             }
         }
 
@@ -98,7 +120,7 @@ class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserN
     return boolean}
     fun newUserDbStepTwo(password: String){
         var stepone = liveNewUserForDbStepOne.value
-        var stepTwo = UserModelDomain(firstName = stepone?.firstName!!, lastName = stepone?.lastName!!, email = stepone?.email!!,password = password)
+        var stepTwo = UserModelDomain(firstName = stepone?.firstName!!, lastName = stepone.lastName!!, email = stepone?.email!!,password = password)
         mliveNewUserForDbStepTwo.value = stepTwo
         save(stepTwo)
     }
@@ -130,8 +152,25 @@ class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserN
         return true
     }
     fun emailCheckInDB(email: String): Boolean {
-        var boolean =true
-        viewModelScope.launch(Dispatchers.Main){boolean =emailCheckInDBsus(email)}
+        var boolean =false
+        viewModelScope.launch(Dispatchers.Main){
+            liveBoolemailCheckInDB.value = null
+            var arr = get()
+            System.out.println(arr.size)
+            for (elem in arr){
+                System.out.println(elem.email)
+                System.out.println(elem.password)
+                if (email == elem.email){
+                    boolean = true
+                    System.out.println("Совпадение найдено")
+                    mliveBoolemailCheckInDB.value = true
+
+                }
+            }
+            if(boolean == false){
+                mliveBoolemailCheckInDB.value = false
+            }
+        }
         return boolean
     }
     suspend fun emailCheckInDBsus(email: String):Boolean{
@@ -151,9 +190,13 @@ class MainViewModel @Inject constructor(private val getUserNameUseCase: GetUserN
         }
         return flashSale
     }
-    fun getLoadImage(){
-
-    }
+    fun getItemOntouch():ItemOnTouch{
+        var itemOnTouch = ItemOnTouch()
+        viewModelScope.launch {
+            itemOnTouch = getItemOnTouchUseCase.execute()
+            mliveGetItemOnTouch.value = itemOnTouch
+        }
+    return itemOnTouch}
     fun getAllLatest():Latest{
         var latest = Latest()
         viewModelScope.launch {

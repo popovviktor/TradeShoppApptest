@@ -1,9 +1,11 @@
 package com.example.testcleanarch.adapter
 
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testcleanarch.R
 import com.example.testcleanarch.databinding.ItemFlashSaleForRvBinding
@@ -20,11 +22,18 @@ class AdapterFlashSale:RecyclerView.Adapter<AdapterFlashSale.FlashSaleHolder>() 
         categoryItem.text = item.category
         priceItem.text = "$ " + item.price.toString()
         nameitem.text = item.name
+        discount.text = item.discount.toString() +"% off"
         val cal = CallbackForPicassoSetBackGroundLayout(contrItem,imViewFlashitem)
             Picasso.get().load(item.imageUrl)
                 .resize(174,200)
                 .into(imViewFlashitem,cal)
             imViewFlashitem.visibility = View.INVISIBLE
+            itemView.setOnClickListener {
+                var bundle: Bundle = Bundle()
+                bundle.putString("mainphoto",item.imageUrl)
+
+                itemView.findNavController().navigate(R.id.itemTouchFragment,bundle)
+            }
         }
     }
 

@@ -6,14 +6,21 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.testcleanarch.R
 
 import com.example.testcleanarch.databinding.ActivityMainBinding
+import com.example.testcleanarch.presentation.screensNav.ChattFragment
+import com.example.testcleanarch.presentation.screensNav.SearchFragment
 
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.InputStream
@@ -28,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
+
+        vm.getSearch()
         vm.live.observe(this, Observer {
 
         })
@@ -35,11 +44,19 @@ class MainActivity : AppCompatActivity() {
         //supportFragmentManager.beginTransaction().replace(R.id.place_holder_login_act,SignFragment()).commit()
         vm.getAllFlash()
         vm.getAllLatest()
+
         val navController = findNavController(R.id.nav_host)
         val bottomnav = bind.bottomNavMenu
         bottomnav.setupWithNavController(navController)
         System.out.println("FLASSSSSSSSSSSSSSSSSS")
         System.out.println("LAAAAAAAAATEST")
+        vm.liveSearchWord.observe(this,Observer{
+
+                supportFragmentManager.beginTransaction().replace(R.id.frameMainHome,
+                    SearchFragment()
+                ).commit()
+
+        })
         bottomnav.setOnItemSelectedListener {
             if (it.itemId == R.id.nav_home)navController.navigate(R.id.nav_home)
             if (it.itemId == R.id.nav_like)navController.navigate(R.id.nav_like)
@@ -47,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             if (it.itemId == R.id.nav_chat)navController.navigate(R.id.nav_chat)
             if (it.itemId == R.id.nav_profile)navController.navigate(R.id.nav_profile)
             return@setOnItemSelectedListener true}
+
 
 
 
@@ -71,4 +89,5 @@ class MainActivity : AppCompatActivity() {
             } catch (ex:Exception) { ex.printStackTrace()}
         }
     }
+
 }

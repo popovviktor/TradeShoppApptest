@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screensNav.touchitem.ItemTouchFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout12"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="328dp"
+                android:layout_height="279dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/backmenu"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="8dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constrImMainPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imviewFragMainPhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="42dp"
+                android:layout_height="95dp"
+                android:layout_marginStart="-21dp"
+                android:background="@android:color/transparent"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+                app:layout_constraintStart_toEndOf="@+id/cardView2"
+                app:layout_constraintTop_toTopOf="@+id/cardView2"
+                app:layout_constraintVertical_bias="0.74">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/editlayintouch">
+
+                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_favorite_border_24"
+                        app:layout_constraintBottom_toTopOf="@+id/imageView8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_horizontal_rule_24sss"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_outline_share_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                        app:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="-10dp"
+                android:alpha="1"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:foreground="@android:color/transparent"
+                android:foregroundTint="@android:color/transparent"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardElevation="20dp"
+                app:cardMaxElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cardView2">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvImagesitems"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+            <TextView
+                android:id="@+id/priceTouchItem"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poopinsmedium"
+                android:text="$ 22,5"
+                android:textColor="#161826"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/nametouchitem" />
+
+            <TextView
+                android:id="@+id/nametouchitem"
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="New Balance Sneakers"
+                android:textColor="#161826"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvImagesitems" />
+
+            <TextView
+                android:id="@+id/descriptionitemtouch"
+                android:layout_width="231dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poopinsmedium"
+                android:text="Shoes inspired by 80s running shoes are still relevant today"
+                android:textColor="#808080"
+                android:textSize="9sp"
+                app:layout_constraintStart_toStartOf="@+id/nametouchitem"
+                app:layout_constraintTop_toBottomOf="@+id/nametouchitem" />
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_star_border_24"
+                app:layout_constraintStart_toStartOf="@+id/descriptionitemtouch"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionitemtouch" />
+
+            <TextView
+                android:id="@+id/raitingitem"
+                android:layout_width="wrap_content"
+                android:layout_height="11dp"
+                android:layout_marginStart="3dp"
+                android:gravity="center"
+                android:text="3.9"
+                android:textColor="#161826"
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView23"
+                app:layout_constraintStart_toEndOf="@+id/imageView23"
+                app:layout_constraintTop_toTopOf="@+id/imageView23" />
+
+            <TextView
+                android:id="@+id/reviewsitem"
+                android:layout_width="wrap_content"
+                android:layout_height="11dp"
+                android:layout_marginStart="2dp"
+                android:text="(4000 reviews)"
+                android:textColor="#808080"
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="@+id/raitingitem"
+                app:layout_constraintStart_toEndOf="@+id/raitingitem"
+                app:layout_constraintTop_toTopOf="@+id/raitingitem" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poopinsmedium"
+                android:text="Color:"
+                android:textColor="#737373"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/imageView23"
+                app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvColorsitem"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/textView32"
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout13"
+            android:layout_width="0dp"
+            android:layout_height="117dp"
+            android:background="@drawable/blackitemtouch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="38dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/blackitemtouchforbutton"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout14"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout14"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout14"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck">
+
+                <ImageView
+                    android:id="@+id/imageView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="170dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/blackitemtouchforbutton"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck">
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="@font/poopinsmedium"
+                    android:text="ADD TO CARD"
+                    android:textColor="#FFFFFF"
+                    android:textSize="8sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poopinsmedium"
+                    android:text="#2,500"
+                    android:textColor="#99A0FF"
+                    android:textSize="8sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView33"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poopinsmedium"
+                android:text="Quantity:"
+                android:textColor="#808080"
+                android:textSize="9sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout14"
+                android:layout_width="38dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/blackitemtouchforbutton"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="@+id/textView35"
+                app:layout_constraintStart_toStartOf="@+id/textView35"
+                app:layout_constraintTop_toBottomOf="@+id/textView35"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck">
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_horizontal_rule_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_horizontal_rule_24" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

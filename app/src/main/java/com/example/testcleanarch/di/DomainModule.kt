@@ -34,5 +34,13 @@ class DomainModule {
     fun providesGetAllLatest(userRepository: UserRepository):GetAllLatestUseCase{
         return GetAllLatestUseCase(userRepository = userRepository)
     }
+    @Provides
+    fun providesGetItemOnTouch(userRepository: UserRepository):GetItemOnTouchUseCase{
+        return GetItemOnTouchUseCase(userRepository = userRepository)
+    }
+    @Provides
+    fun providesGetSearchUseCase(userRepository: UserRepository):GetSearchUseCase{
+        return GetSearchUseCase(userRepository=userRepository)
+    }
 
 }
